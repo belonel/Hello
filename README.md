@@ -1,2 +1,2 @@
 # Hello
-Thos is just an example of sample code
+This is just an example of sample code
