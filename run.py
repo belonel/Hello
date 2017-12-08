@@ -1,7 +1,3 @@
-from cmath import phase
-from email import message
-
-
 import config
 import telebot
 import json
