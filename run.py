@@ -10,6 +10,7 @@ phrase = ''
 
 @bot.message_handler(commands=['start', 'find'])
 def main(message): # Название функции не играет никакой роли, в принципе
+    bot.send_message(message.chat.id, 'Привет')
     sent = bot.send_message(message.chat.id, 'Привет!Введи слово и я выдам тебе цитату.')
     bot.register_next_step_handler(sent, fileSearch)
 
