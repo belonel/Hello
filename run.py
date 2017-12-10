@@ -5,6 +5,8 @@ import logging
 token = config.token
 bot = telebot.TeleBot(token)
 
+logging.basicConfig(filename="sample.log", level=logging.INFO)
+
 @bot.message_handler(commands=['start', 'find'])
 def main(message):
     try:
