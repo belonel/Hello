@@ -1,10 +1,9 @@
-import config
 import telebot
 import __init__
 import procfile
 
-token = config.token
-bot = telebot.TeleBot(config.token)
+token = token='497421683:AAHtSmzXBBGqHoPuJ-zR7qOd97NwWUEWqIM'
+bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start', 'find'])
 def main(message):
