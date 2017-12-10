@@ -1,6 +1,8 @@
 import config
 import telebot
 import json
+import __init__
+import procfile
 
 token = config.token
 bot = telebot.TeleBot(config.token)
