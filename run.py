@@ -136,10 +136,6 @@ def admin(message):
     if message.text == '1':
         sent = bot.send_message(message.chat.id, "Введите тэги.\nФормат: \"первый, второй, третий\".\nПодряд с маленькой буквы разделяя запятой")
         bot.register_next_step_handler(sent, inputTag)
-        # keyboard = types.InlineKeyboardMarkup()
-        # url_button = types.InlineKeyboardButton(text="Перейти на Яндекс", url="https://ya.ru")
-        # keyboard.add(url_button)
-        # bot.send_message(message.chat.id, "Привет! Нажми на кнопку и перейди в поисковик.", reply_markup=keyboard)
     elif message.text == '2':
         deleteLastPhrase(message)
     elif message.text == '3':
