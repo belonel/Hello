@@ -1,11 +1,10 @@
-import config
 import telebot
 import json
 import __init__
 import procfile
 
-token = config.token
-bot = telebot.TeleBot(config.token)
+token='497421683:AAHtSmzXBBGqHoPuJ-zR7qOd97NwWUEWqIM'
+bot = telebot.TeleBot(token)
 tag = ''
 phrase = ''
 
