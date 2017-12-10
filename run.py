@@ -3,7 +3,7 @@ import json
 import __init__
 import procfile
 
-token='497421683:AAHtSmzXBBGqHoPuJ-zR7qOd97NwWUEWqIM'
+token = config.token
 bot = telebot.TeleBot(token)
 tag = ''
 phrase = ''
