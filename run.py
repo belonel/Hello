@@ -1,8 +1,7 @@
 import telebot
 import json
-import config
 
-token = config.token
+token='368295679:AAFYu2zIKKDP9DxeL7CPqumOGKEpxz5HE2g'
 bot = telebot.TeleBot(token)
 tag = ''
 phrase = ''
