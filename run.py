@@ -8,7 +8,7 @@ tag = ''
 phrase = ''
 
 @bot.message_handler(commands=['start', 'find'])
-def main(message): # Название функции не играет никакой роли, в принципе
+def main(message):
     sent = bot.send_message(message.chat.id, 'Привет!Введи слово и я выдам тебе цитату.')
     bot.register_next_step_handler(sent, fileSearch)
 
@@ -21,20 +21,12 @@ def adminbot(message):
                                              "3 - Выйти из меню администрирования")
     bot.register_next_step_handler(sent, admin)
 
-@bot.message_handler(commands=['test'])
-def test(message):
-    bot.send_message(message.chat.id, "Это команда тест")
 
 def check (message):
-    if message.text == '/start':
-        main(message)
-    elif message.text == '/adminbot':
-        adminbot(message)
-    elif message.text == '/find':
-        main(message)
+    if message.text == '/start' or message.text == '/adminbot' or message.text == '/find':
+        return 1
     else:
         return 0
-    return 1
 
 
 def addPhrase(message):
@@ -78,7 +70,7 @@ def deleteLastPhrase(message):
 
     id = len(data) - 1
     sent = bot.send_message(message.chat.id,
-                            "Теперь последняя цитата:\n№{i}\nТэг: {t}\nЦитата: {p}".format(i=id, t=data[id]["Цитата"], p=data[id]["Цитата"]))
+                            "Теперь последняя цитата:\n№{i}\nТэг: {t}\nЦитата: {p}".format(i=id+1, t=data[id]["Цитата"], p=data[id]["Цитата"]))
     bot.register_next_step_handler(sent, admin)
 
     bot.send_message(message.chat.id, "Выберите одну из команд\n"
@@ -95,22 +87,22 @@ def find(message):
     bot.send_message(message.chat.id, "Выполняется поиск...")
 
 def fileSearch(message):
-    if (check(message) == 1):
-        return
+    if (check(message) == 0):
+        with open('DB.json', encoding='utf-8') as data_file:
+            data = json.loads(data_file.read())
 
-    with open('DB.json', encoding='utf-8') as data_file:
-        data = json.loads(data_file.read())
-
-    for i in range(0, len(data)):
-        element = data[i]["Тэг"]
-        for element in data[i]["Тэг"]:
-            if message.text == element:
-                sent = bot.reply_to(message, data[i]["Цитата"])
-                bot.register_next_step_handler(sent, fileSearch)
-                return
+        for i in range(0, len(data)):
+            element = data[i]["Тэг"]
+            for element in data[i]["Тэг"]:
+                if message.text == element:
+                    sent = bot.reply_to(message, data[i]["Цитата"])
+                    bot.register_next_step_handler(sent, fileSearch)
+                    return
+        else:
+            str = bot.send_message(message.chat.id, 'Цитаты по такому слову не найдено, попробуй что-нибудь еще')
+            bot.register_next_step_handler(str, fileSearch)
     else:
-        str = bot.send_message(message.chat.id, 'Цитаты по такому слову не найдено, попробуй что-нибудь еще')
-        bot.register_next_step_handler(str, fileSearch)
+        return
 
 
 def inputTag(message):
